@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+  }
+
+table {
+  width: 100%;
+}
+table * {
+  margin: 0;
+  padding: 10px 3px;
+}
+
+th {
+  background-color: #ccc;
+}
+
+tr>td:first-of-type {
+  text-align: center;
+}
+td {
+  border: 2px solid #ccc;
+}
+
+button {
+  background: linear-gradient(white, #ddd);
+  border: 1px solid #555;
+  border-radius: 2px;
+  height: 2rem;
+  width: auto;
+  padding: 0.5rem;
+}
+button:active {
+  background: linear-gradient(#ddd, white);
+}
+.blue {
+  background: linear-gradient(#eef, #bbd);
+}
+.blue:active {
+  background: linear-gradient(#bbd, #eef);
+}
+
+
+input[type="checkbox"]#new-book {
+  -webkit-appearance: none;
+  position: relative;
+  border: 1px solid #555;
+  border-radius: 2px;
+  height: 2rem;
+  width: auto;
+  padding: 0.5rem;
+}
+input[type="checkbox"]#new-book:checked {
+  background: #aaa;
+}
+input[type="checkbox"]#new-book::after {
+  content: "NEW BOOK";
+  position: relative;
+  top: calc(50% - 0.5rem);
+}
+input[type="checkbox"]#new-book:checked::after {
+  color: #ddd;
+}
+
+#new-book-form {
+  display: block;
+/*position: absolute;*/
+  overflow: hidden;
+  background: white;
+  transition: height 0.3s;
+  width: 20rem;
+  line-height: 1.5rem;
+}
+form {
+  text-align: right;
+}
+input[type="checkbox"]#new-book ~ #new-book-form {
+  height: 0px;
+}
+input[type="checkbox"]#new-book:checked ~ #new-book-form {
+  height: 9rem;
+}
+
+
+select {
+  background-color: #ddd;
+  border: 1px solid #555;
+  border-radius: 2px;
+  height: 2rem;
+  width: auto;
+  padding: 0.5rem;
+}
