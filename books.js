@@ -67,11 +67,24 @@ function renderLibrary() {
 
   document.querySelectorAll(".selection").forEach( box => {
     box.addEventListener("change", setMasterCheckbox );
+    
+    const row = Number(box.getAttribute("data-row"));
+    box.addEventListener("change", () => setRowBackground(row) );
   });
 
   const masterCheckbox = document.getElementById("select-all");
   masterCheckbox.indeterminate = false;
   masterCheckbox.checked = false;
+}
+
+
+function setRowBackground( i ) {
+  const row = document.querySelector(`#books tr[data-row="${i}"]`);
+  const checkbox = document.querySelector(`.selection[data-row="${i}"]`);
+  row.classList.toggle("highlight", checkbox.checked);
+}
+function highlightSelectedRows() {
+  for(let i=0; i<library.length; i++) setRowBackground(i);
 }
 
 
@@ -128,6 +141,7 @@ window.addEventListener( "load", renderLibrary )
 document.getElementById("select-all").addEventListener("change", e => {
   document.querySelectorAll(".selection")
           .forEach(box => {box.checked = e.target.checked;});
+  highlightSelectedRows();
 });
 
 document.getElementById("delete-selected").addEventListener("click", () => {
@@ -146,6 +160,7 @@ document.getElementById("invert-selection").addEventListener("click", () => {
   document.querySelectorAll(".selection").forEach( box => {
     box.checked = !box.checked;
   });
+  highlightSelectedRows();
   setMasterCheckbox();
 });
 

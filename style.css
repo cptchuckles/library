@@ -17,6 +17,9 @@ th {
 tr>td:first-of-type {
   text-align: center;
 }
+tr.highlight {
+  background-color: #ffe;
+}
 td {
   border: 2px solid #ccc;
 }
