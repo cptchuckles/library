@@ -84,7 +84,7 @@ function setRowBackground( i ) {
   row.classList.toggle("highlight", checkbox.checked);
 }
 function highlightSelectedRows() {
-  for(let i=0; i<library.length; i++) setRowBackground(i);
+  for(const book in library) setRowBackground(book);
 }
 
 
