@@ -2,52 +2,71 @@
     box-sizing: border-box;
   }
 
+:root {
+  --theme-main: #bbe;
+  --theme-hl: white;
+  --theme-emboss: linear-gradient(var(--theme-hl), var(--theme-main));
+  --theme-relief: linear-gradient(var(--theme-main), var(--theme-hl));
+
+  --gray-main: #ccc;
+  --gray-hl: #fff;
+  --gray-emboss: linear-gradient(var(--gray-hl), var(--gray-main));
+  --gray-relief: linear-gradient(var(--gray-main), var(--gray-hl));
+
+  --border-color: #aaa;
+  --table-line-color: #ccc;
+
+  --selected-hl: #ffc;
+  --corner-radius: 10px;
+}
+
 table {
   width: 100%;
 }
 table * {
   margin: 0;
   padding: 10px 3px;
+  border-radius: var(--corner-radius);
 }
 
 th {
-  background-color: #ccc;
+  background-color: var(--theme-main);
 }
 
 tr>td:first-of-type {
   text-align: center;
 }
 tr.highlight {
-  background-color: #ffe;
+  background-color: var(--selected-hl);
 }
 td {
   border: 2px solid #ccc;
 }
 
 button {
-  background: linear-gradient(white, #ddd);
-  border: 1px solid #555;
-  border-radius: 2px;
+  background: var(--gray-emboss);
+  border: 1px solid var(--border-color);
+  border-radius: var(--corner-radius);
   height: 2rem;
   width: auto;
   padding: 0.5rem;
 }
 button:active {
-  background: linear-gradient(#ddd, white);
+  background: var(--gray-relief);
 }
-.blue {
-  background: linear-gradient(#eef, #bbd);
+.themed {
+  background: var(--theme-emboss);
 }
-.blue:active {
-  background: linear-gradient(#bbd, #eef);
+.themed:active {
+  background: var(--theme-relief);
 }
 
 
 input[type="checkbox"]#new-book {
   -webkit-appearance: none;
   position: relative;
-  border: 1px solid #555;
-  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--corner-radius);
   height: 2rem;
   width: auto;
   padding: 0.5rem;
@@ -83,12 +102,6 @@ input[type="checkbox"]#new-book:checked ~ #new-book-form {
   height: 9rem;
 }
 
-
-select {
-  background-color: #ddd;
-  border: 1px solid #555;
-  border-radius: 2px;
-  height: 2rem;
-  width: auto;
-  padding: 0.5rem;
+fieldset {
+  border-radius: var(--corner-radius);
 }
