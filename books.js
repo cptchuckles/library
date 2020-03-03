@@ -53,7 +53,7 @@ function renderLibrary() {
       <td>
         <input type="checkbox" class="selection" data-row="${i}" />
       </td>
-      <td>${book.title}</td>
+      <td><em>${book.title}</em></td>
       <td>${book.author}</td> 
       <td>${book.length}</td> 
       <td>
