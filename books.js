@@ -138,31 +138,41 @@ function addBook() {
 
 window.addEventListener( "load", renderLibrary )
 
-document.getElementById("select-all").addEventListener("change", e => {
-  document.querySelectorAll(".selection")
-          .forEach(box => {box.checked = e.target.checked;});
-  highlightSelectedRows();
-});
-
-document.getElementById("delete-selected").addEventListener("click", () => {
-  document.querySelectorAll(".selection:checked").forEach( item => {
-    const index = Number(item.getAttribute("data-row"));
-    delete( library[index] );
+document
+  .getElementById("select-all")
+  .addEventListener("change", e => {
+    document.querySelectorAll(".selection")
+            .forEach(box => {box.checked = e.target.checked;});
+    highlightSelectedRows();
   });
 
-  library = library.filter( e => e );
-
-  renderLibrary();
-});
-
-document.getElementById("invert-selection").addEventListener("click", () => {
-  document.querySelectorAll(".selection").forEach( box => {
-    box.checked = !box.checked;
+document
+  .getElementById("delete-selected")
+  .addEventListener("click", () => {
+    document
+      .querySelectorAll(".selection:checked")
+      .forEach( item => {
+        const index = Number(item.getAttribute("data-row"));
+        delete( library[index] );
+      });
+    library = library.filter( e => e );
+    renderLibrary();
   });
-  highlightSelectedRows();
-  setMasterCheckbox();
-});
 
-document.getElementById("save-library").addEventListener("click", () => {
-  alert("todo");
-});
+document
+  .getElementById("invert-selection")
+  .addEventListener("click", () => {
+    document
+      .querySelectorAll(".selection")
+      .forEach( box => {
+        box.checked = !box.checked;
+      });
+    highlightSelectedRows();
+    setMasterCheckbox();
+  });
+
+document
+  .getElementById("save-library")
+  .addEventListener("click", () => {
+    alert("todo");
+  });
