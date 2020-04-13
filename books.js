@@ -136,7 +136,7 @@ function addBook() {
 }
 
 
-window.addEventListener( "load", renderLibrary )
+window.addEventListener( "load", renderLibrary );
 
 document
   .getElementById("select-all")
