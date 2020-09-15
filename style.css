@@ -71,6 +71,9 @@ input[type="checkbox"]#new-book {
   width: auto;
   padding: 0.5rem;
 }
+input[type="checkbox"]#new-book:focus {
+  outline: none;
+}
 input[type="checkbox"]#new-book:checked {
   background: #aaa;
 }
@@ -99,7 +102,7 @@ input[type="checkbox"]#new-book ~ #new-book-form {
   height: 0px;
 }
 input[type="checkbox"]#new-book:checked ~ #new-book-form {
-  height: 9rem;
+  height: 11rem;
 }
 
 fieldset {
