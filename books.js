@@ -1,7 +1,7 @@
-function Book(title, author, length, read) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
-  this.length = length;
+	this.pages = pages;
   this.read = read;
 }
 
@@ -9,7 +9,7 @@ function Book(title, author, length, read) {
 Book.prototype.toString = function() {
   return `${this.title} `
        + `by ${this.author}, `
-       + `${this.length} pages, `
+		 + `${this.pages} pages, `
        + `${this.read ? "read already" : "not read yet"}`;
 };
 
@@ -55,7 +55,7 @@ function renderLibrary() {
       </td>
       <td><em>${book.title}</em></td>
       <td>${book.author}</td> 
-      <td>${book.length}</td> 
+			<td>${book.pages}</td> 
       <td>
         <a href="#">${book.read ? "yes already" : "not yet"}</a>
       </td>`;
@@ -127,10 +127,14 @@ function addBook() {
     }
   });
 
-  library.push( new Book( book.title,
+	library.push(
+		new Book(
+			book.title,
                           book.author,
-                          Number(book.length),
-                          book.read ));
+			Number(book.pages),
+			book.read
+		)
+	);
   renderLibrary();
   document.getElementById("new-book").checked = false;
 }
@@ -142,7 +146,7 @@ document
   .getElementById("select-all")
   .addEventListener("change", e => {
     document.querySelectorAll(".selection")
-            .forEach(box => {box.checked = e.target.checked;});
+		        .forEach(box => box.checked = e.target.checked);
     highlightSelectedRows();
   });
 
@@ -162,17 +166,17 @@ document
 document
   .getElementById("invert-selection")
   .addEventListener("click", () => {
-    document
-      .querySelectorAll(".selection")
-      .forEach( box => {
-        box.checked = !box.checked;
-      });
+		document.querySelectorAll(".selection")
+		        .forEach( box => box.checked = !box.checked);
     highlightSelectedRows();
     setMasterCheckbox();
   });
 
 document
-  .getElementById("save-library")
-  .addEventListener("click", () => {
-    alert("todo");
+	.getElementById("export-library")
+	.addEventListener("click", async () => {
+		let json = JSON.stringify({"library":{"books":library}});
+		console.log(json);
+		await navigator.clipboard.writeText(json);
+		alert("Library exported to clipboard!");
   });

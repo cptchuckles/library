@@ -20,6 +20,11 @@
   --corner-radius: 10px;
 }
 
+body {
+	max-width: 900px;
+	margin: 2rem auto;
+}
+
 table {
   width: 100%;
 }

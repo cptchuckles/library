@@ -10,7 +10,7 @@
     <script type="text/javascript" src="books.js" defer></script>
 
     <input type="checkbox" id="new-book" class="themed" />
-    <button id="save-library" class="themed">SAVE LIBRARY</button>
+		<button id="export-library" class="themed">EXPORT LIBRARY</button>
     <button id="delete-selected">Delete Selected</button>
     <button id="invert-selection">Invert Selection</button>
 
@@ -24,8 +24,8 @@
           <label for="author">Author:</label> 
             <input type="text" name="author" id="author" /><br />
 
-          <label for="length">Length (pages):</label> 
-            <input type="number" name="length" id="length" /><br />
+					<label for="pages">Pages:</label>
+						<input type="number" name="pages" id="pages" /><br />
 
           <label for="read">Have Read:</label> 
             <input type="checkbox" name="read" id="read" />
@@ -43,7 +43,7 @@
           </th>
           <th>Title</th> 
           <th>Author</th> 
-          <th>Length (pages)</th> 
+					<th>Pages</th>
           <th>Read?</th>
         </tr>
       </thead>
