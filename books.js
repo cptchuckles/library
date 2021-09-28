@@ -1,20 +1,20 @@
 function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
+	this.title = title;
+	this.author = author;
 	this.pages = pages;
-  this.read = read;
+	this.read = read;
 }
 
 
 Book.prototype.toString = function() {
-  return `${this.title} `
-       + `by ${this.author}, `
+	return `${this.title} `
+		 + `by ${this.author}, `
 		 + `${this.pages} pages, `
-       + `${this.read ? "read already" : "not read yet"}`;
+		 + `${this.read ? "read already" : "not read yet"}`;
 };
 
 Book.prototype.toggleRead = function() {
-  this.read = !this.read;
+	this.read = !this.read;
 };
 
 
@@ -34,143 +34,143 @@ let library = [];
 
 library.push( theHobbit );
 library.push( new Book(
-  "Necronomicon",
-  "H.P. Lovecraft",
-  666,
-  true
+	"Necronomicon",
+	"H.P. Lovecraft",
+	666,
+	true
 ));
 
 
 function renderLibrary() {
-  const libraryTableBody = document.querySelector("#books>tbody");
-  libraryTableBody.innerHTML = "";
+	const libraryTableBody = document.querySelector("#books>tbody");
+	libraryTableBody.innerHTML = "";
 
-  library.forEach( (book, i) => {
-    const row = document.createElement("tr");
-    row.setAttribute( "data-row", String(i) );
+	library.forEach( (book, i) => {
+		const row = document.createElement("tr");
+		row.setAttribute( "data-row", String(i) );
 
-    row.innerHTML = `
-      <td>
-        <input type="checkbox" class="selection" data-row="${i}" />
-      </td>
-      <td><em>${book.title}</em></td>
-      <td>${book.author}</td> 
+		row.innerHTML = `
+			<td>
+				<input type="checkbox" class="selection" data-row="${i}" />
+			</td>
+			<td><em>${book.title}</em></td>
+			<td>${book.author}</td> 
 			<td>${book.pages}</td> 
-      <td>
-        <a href="#">${book.read ? "yes already" : "not yet"}</a>
-      </td>`;
+			<td>
+				<a href="#">${book.read ? "yes already" : "not yet"}</a>
+			</td>`;
 
-    libraryTableBody.appendChild( row );
-    document.querySelector(`#books tr[data-row="${i}"] a`)
-            .addEventListener("click", () => toggleBookRead(i) );
-  });
+		libraryTableBody.appendChild( row );
+		document.querySelector(`#books tr[data-row="${i}"] a`)
+		        .addEventListener("click", () => toggleBookRead(i) );
+	});
 
-  document.querySelectorAll(".selection").forEach( box => {
-    box.addEventListener("change", setMasterCheckbox );
-    
-    const row = Number(box.getAttribute("data-row"));
-    box.addEventListener("change", () => setRowBackground(row) );
-  });
+	document.querySelectorAll(".selection").forEach( box => {
+		box.addEventListener("change", setMasterCheckbox );
+		
+		const row = Number(box.getAttribute("data-row"));
+		box.addEventListener("change", () => setRowBackground(row) );
+	});
 
-  const masterCheckbox = document.getElementById("select-all");
-  masterCheckbox.indeterminate = false;
-  masterCheckbox.checked = false;
+	const masterCheckbox = document.getElementById("select-all");
+	masterCheckbox.indeterminate = false;
+	masterCheckbox.checked = false;
 }
 
 
 function setRowBackground( i ) {
-  const row = document.querySelector(`#books tr[data-row="${i}"]`);
-  const checkbox = document.querySelector(`.selection[data-row="${i}"]`);
-  row.classList.toggle("highlight", checkbox.checked);
+	const row = document.querySelector(`#books tr[data-row="${i}"]`);
+	const checkbox = document.querySelector(`.selection[data-row="${i}"]`);
+	row.classList.toggle("highlight", checkbox.checked);
 }
 function highlightSelectedRows() {
-  for(const book in library) setRowBackground(book);
+	for(const book in library) setRowBackground(book);
 }
 
 
 function setMasterCheckbox() {
-  let checked = undefined;
-  const master = document.getElementById("select-all");
-  master.indeterminate = false;
+	let checked = undefined;
+	const master = document.getElementById("select-all");
+	master.indeterminate = false;
 
-  for(const checkbox of document.querySelectorAll(".selection")) {
-    if( checkbox.checked != checked ) {
-      if( checked === undefined )
-        checked = checkbox.checked;
-      else {
-        master.indeterminate = true;
-        return;
-  } } }
+	for(const checkbox of document.querySelectorAll(".selection")) {
+		if( checkbox.checked != checked ) {
+			if( checked === undefined )
+				checked = checkbox.checked;
+			else {
+				master.indeterminate = true;
+				return;
+	}	}	}
 
-  master.checked = checked;
+	master.checked = checked;
 }
 
 
 function toggleBookRead( bookIndex ) {
-  library[ bookIndex ].toggleRead();
-  renderLibrary();
+	library[ bookIndex ].toggleRead();
+	renderLibrary();
 }
 
 
 function addBook() {
-  const inputs = document.querySelectorAll("#new-book-form input");
+	const inputs = document.querySelectorAll("#new-book-form input");
 
-  let book = {};
-  inputs.forEach( input => {
-    if( input.type == "checkbox" ) {
-      book[input.name] = input.checked;
-      input.checked = false;
-    }
-    else if( input.type != "submit" ) {
-      book[input.name] = input.value;
-      input.value = "";
-    }
-  });
+	let book = {};
+	inputs.forEach( input => {
+		if( input.type == "checkbox" ) {
+			book[input.name] = input.checked;
+			input.checked = false;
+		}
+		else if( input.type != "submit" ) {
+			book[input.name] = input.value;
+			input.value = "";
+		}
+	});
 
 	library.push(
 		new Book(
 			book.title,
-                          book.author,
+			book.author,
 			Number(book.pages),
 			book.read
 		)
 	);
-  renderLibrary();
-  document.getElementById("new-book").checked = false;
+	renderLibrary();
+	document.getElementById("new-book").checked = false;
 }
 
 
 window.addEventListener( "load", renderLibrary );
 
 document
-  .getElementById("select-all")
-  .addEventListener("change", e => {
-    document.querySelectorAll(".selection")
+	.getElementById("select-all")
+	.addEventListener("change", e => {
+		document.querySelectorAll(".selection")
 		        .forEach(box => box.checked = e.target.checked);
-    highlightSelectedRows();
-  });
+		highlightSelectedRows();
+	});
 
 document
-  .getElementById("delete-selected")
-  .addEventListener("click", () => {
-    document
-      .querySelectorAll(".selection:checked")
-      .forEach( item => {
-        const index = Number(item.getAttribute("data-row"));
-        delete( library[index] );
-      });
-    library = library.filter( e => e );
-    renderLibrary();
-  });
+	.getElementById("delete-selected")
+	.addEventListener("click", () => {
+		document
+			.querySelectorAll(".selection:checked")
+			.forEach( item => {
+				const index = Number(item.getAttribute("data-row"));
+				delete( library[index] );
+			});
+		library = library.filter( e => e );
+		renderLibrary();
+	});
 
 document
-  .getElementById("invert-selection")
-  .addEventListener("click", () => {
+	.getElementById("invert-selection")
+	.addEventListener("click", () => {
 		document.querySelectorAll(".selection")
 		        .forEach( box => box.checked = !box.checked);
-    highlightSelectedRows();
-    setMasterCheckbox();
-  });
+		highlightSelectedRows();
+		setMasterCheckbox();
+	});
 
 document
 	.getElementById("export-library")
@@ -179,4 +179,4 @@ document
 		console.log(json);
 		await navigator.clipboard.writeText(json);
 		alert("Library exported to clipboard!");
-  });
+	});
